@@ -4,11 +4,13 @@ import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
+import android.widget.CompoundButton
 import android.widget.SeekBar
 import kotlinx.android.synthetic.main.activity_sample.*
 import nl.picnic.fingerpaintingview.R
 
-class SampleActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener, View.OnClickListener {
+class SampleActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener, View.OnClickListener,
+        CompoundButton.OnCheckedChangeListener{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +28,8 @@ class SampleActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener, Vie
         normal.setOnClickListener(this)
         emboss.setOnClickListener(this)
         blur.setOnClickListener(this)
+        dash.setOnCheckedChangeListener(this)
+
     }
 
     override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
@@ -68,6 +72,10 @@ class SampleActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener, Vie
     }
 
     override fun onStopTrackingTouch(seekBar: SeekBar?) {
+    }
+
+    override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
+        finger.dash(isChecked)
     }
 
     override fun onBackPressed() {

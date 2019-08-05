@@ -28,6 +28,7 @@ class FingerPaintImageView @JvmOverloads constructor(context: Context,
     private var brushCanvas: Canvas? = null
     private var countDrawn = 0
     private var currentBrush = BrushType.NORMAL
+    private var dashPathEffect = DashPathEffect(floatArrayOf(15f, 15f), 0f)
 
     var inEditMode = false
 
@@ -216,6 +217,13 @@ class FingerPaintImageView @JvmOverloads constructor(context: Context,
      */
     fun normal() {
         currentBrush = BrushType.NORMAL
+    }
+
+    /**
+     * Enable dash effect
+     */
+    fun dash(dash:Boolean) {
+        pathPaint.pathEffect =if (dash) dashPathEffect else null
     }
 
     /**
