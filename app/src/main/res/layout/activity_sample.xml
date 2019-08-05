@@ -214,7 +214,9 @@
                 android:id="@+id/dash"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dash"/>
+                android:text="Dash"
+                android:textSize="11dp"/>
+
 
         </LinearLayout>
 

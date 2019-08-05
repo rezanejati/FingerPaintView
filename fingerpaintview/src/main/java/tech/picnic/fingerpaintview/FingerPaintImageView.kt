@@ -28,7 +28,7 @@ class FingerPaintImageView @JvmOverloads constructor(context: Context,
     private var brushCanvas: Canvas? = null
     private var countDrawn = 0
     private var currentBrush = BrushType.NORMAL
-    private var dashPathEffect = DashPathEffect(floatArrayOf(15f, 15f), 0f)
+    private var defaultDashEffect= false
 
     var inEditMode = false
 
@@ -49,6 +49,13 @@ class FingerPaintImageView @JvmOverloads constructor(context: Context,
         set(value) {
             field = value
             pathPaint.strokeWidth = value
+            dash()
+        }
+
+    var dashEffect = defaultDashEffect
+        set(value) {
+            field = value
+            dash()
         }
 
     private val matrixValues = FloatArray(9)
@@ -220,13 +227,6 @@ class FingerPaintImageView @JvmOverloads constructor(context: Context,
     }
 
     /**
-     * Enable dash effect
-     */
-    fun dash(dash:Boolean) {
-        pathPaint.pathEffect =if (dash) dashPathEffect else null
-    }
-
-    /**
      * Change brush type to emboss
      */
     fun emboss() {
@@ -247,6 +247,13 @@ class FingerPaintImageView @JvmOverloads constructor(context: Context,
         paths.takeIf { it.isNotEmpty() }?.removeAt(paths.lastIndex)
         countDrawn--
         invalidate()
+    }
+
+    /**
+     * Dash effect
+     */
+    private fun dash() {
+        pathPaint.pathEffect =if (dashEffect) DashPathEffect(floatArrayOf(strokeWidth*1.5f, strokeWidth*1.5f), 0f) else null
     }
 
     /**

@@ -75,7 +75,7 @@ class SampleActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener, Vie
     }
 
     override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
-        finger.dash(isChecked)
+        finger.dashEffect=isChecked
     }
 
     override fun onBackPressed() {
